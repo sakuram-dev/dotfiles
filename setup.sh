@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# install 
+sudo apt update
+sudo apt install tmux vim -y
+
 DOT_FILES=(.tmux.conf .vimrc)
 
 for file in ${DOT_FILES[@]}
