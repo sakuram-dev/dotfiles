@@ -21,3 +21,7 @@ set shiftwidth=4
 " search
 set wrapscan
 set hlsearch
+
+" visual
+set list
+set listchars=trail:-,eol:↲
