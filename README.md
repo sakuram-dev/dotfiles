@@ -1,9 +1,13 @@
 # dotfiles
+This is my dotfiles for my personal use. Feel free to use it.
 
-```
-chmod +x dotfiles/setup.sh
+## Installation
+```bash
 cd ~/dotfiles
+chmod +x setup.sh
 ./setup.sh
 ```
-## Document
-- https://qiita.com/massy22/items/5bdb97f8d6e93517f916
+## What is included
+- vim
+- tmux
+- ulauncher
