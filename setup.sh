@@ -1,8 +1,11 @@
 #!/bin/bash
 
+# for ulauncher
+sudo add-apt-repository universe -y && sudo add-apt-repository ppa:agornostal/ulauncher -y
+
 # install 
 sudo apt update
-sudo apt install tmux vim -y
+sudo apt install tmux vim ulauncher -y
 
 DOT_FILES=(.tmux.conf .vimrc)
 
