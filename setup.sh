@@ -10,3 +10,10 @@ for file in ${DOT_FILES[@]}
 do
 	ln -s $HOME/dotfiles/$file $HOME/$file
 done
+
+# .config
+mkdir -p $HOME/.config
+for item in $(find $HOME/dotfiles/.config -mindepth 1 -maxdepth 1)
+do
+    ln -s $item $HOME/.config/
+done
