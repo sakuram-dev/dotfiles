@@ -38,29 +38,21 @@ done
 # Automatically detect dotfiles to symlink
 DOT_FILES=($(find $HOME/dotfiles -maxdepth 1 -type f -name ".*" -exec basename {} \;))
 
-# Create symlinks for each dotfile
+# Create symlinks for each dotfile, overwrite if exists
 for file in "${DOT_FILES[@]}"; do
-    if [ -e "$HOME/$file" ]; then
-        echo "$file already exists, skipping..."
-    else
-        if ! ln -s "$HOME/dotfiles/$file" "$HOME/$file"; then
-            echo "Failed to create symlink for $file, exiting..."
-            exit 1
-        fi
+    if ! ln -sf "$HOME/dotfiles/$file" "$HOME/$file"; then
+        echo "Failed to create symlink for $file, exiting..."
+        exit 1
     fi
 done
 
 # Ensure .config directory exists
 mkdir -p $HOME/.config
 
-# Create symlinks for each item in .config
+# Create symlinks for each item in .config, overwrite if exists
 for item in $(find $HOME/dotfiles/.config -mindepth 1 -maxdepth 1); do
-    if [ -e "$HOME/.config/$(basename $item)" ]; then
-        echo "$(basename $item) already exists in .config, skipping..."
-    else
-        if ! ln -s $item $HOME/.config/; then
-            echo "Failed to create symlink for $(basename $item), exiting..."
-            exit 1
-        fi
+    if ! ln -sf $item $HOME/.config/; then
+        echo "Failed to create symlink for $(basename $item), exiting..."
+        exit 1
     fi
 done
