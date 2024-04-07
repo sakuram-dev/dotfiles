@@ -5,23 +5,32 @@
 # Exit script on any error
 set -e
 
-# Add necessary repositories for ulauncher
-sudo add-apt-repository universe -y
-sudo add-apt-repository ppa:agornostal/ulauncher -y
+# Define a list of packages to install
+PACKAGES=(
+    "tmux"
+    "vim"
+    # add more packages as needed
+)
+
+# Check if the DISPLAY environment variable is set
+if [ -n "$DISPLAY" ]; then
+    echo "DISPLAY environment variable is set, adding GUI packages..."
+    PACKAGES+=(
+        "ulauncher"
+        # add more GUI packages as needed
+    )
+    # Add necessary repositories for ulauncher
+    sudo add-apt-repository universe -y
+    sudo add-apt-repository ppa:agornostal/ulauncher -y
+else
+    echo "DISPLAY environment variable is not set, skipping GUI packages..."
+fi
 
 # Update and install necessary packages
 if ! sudo apt update; then
     echo "Failed to update packages, exiting..."
     exit 1
 fi
-
-# Define a list of packages to install
-PACKAGES=(
-    "tmux"
-    "vim"
-    "ulauncher"
-    # add more packages as needed
-)
 
 # Install packages
 for package in "${PACKAGES[@]}"; do
