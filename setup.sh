@@ -44,12 +44,15 @@ for package in "${PACKAGES[@]}"; do
     fi
 done
 
+# Get thedirectory of the current script
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
 # Automatically detect dotfiles to symlink
-DOT_FILES=($(find $HOME/dotfiles -maxdepth 1 -type f -name ".*" -exec basename {} \;))
+DOT_FILES=($(find $SCRIPT_DIR -maxdepth 1 -type f -name ".*" -exec basename {} \;))
 
 # Create symlinks for each dotfile, overwrite if exists
 for file in "${DOT_FILES[@]}"; do
-    if ! ln -sf "$HOME/dotfiles/$file" "$HOME/$file"; then
+    if ! ln -sf "$SCRIPT_DIR/$file" "$HOME/$file"; then
         echo "Failed to create symlink for $file, exiting..."
         exit 1
     fi
@@ -59,7 +62,7 @@ done
 mkdir -p $HOME/.config
 
 # Create symlinks for each item in .config, overwrite if exists
-for item in $(find $HOME/dotfiles/.config -mindepth 1 -maxdepth 1); do
+for item in $(find $SCRIPT_DIR/.config -mindepth 1 -maxdepth 1); do
     if ! ln -sf $item $HOME/.config/; then
         echo "Failed to create symlink for $(basename $item), exiting..."
         exit 1
