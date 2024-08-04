@@ -7,6 +7,7 @@ set -e
 
 # Define a list of packages to install
 PACKAGES=(
+    "zsh"
     "tmux"
     "vim"
     # add more packages as needed
@@ -43,6 +44,12 @@ for package in "${PACKAGES[@]}"; do
         fi
     fi
 done
+
+# Change default shell to zsh
+if [ "$SHELL" != "/usr/bin/zsh" ]; then
+    echo "Changing default shell to zsh..."
+    chsh -s /usr/bin/zsh
+fi
 
 # Get thedirectory of the current script
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
