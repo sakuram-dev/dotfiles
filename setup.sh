@@ -38,7 +38,7 @@ for package in "${PACKAGES[@]}"; do
     if dpkg -s "$package" >/dev/null 2>&1; then
         echo "$package is already installed, skipping..."
     else
-        if !sudo apt install -y "$package"; then
+        if ! sudo apt install -y "$package"; then
             echo "Failed to install $package, exiting..."
             exit 1
         fi
