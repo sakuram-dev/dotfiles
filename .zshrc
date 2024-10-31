@@ -38,3 +38,12 @@ zinit wait lucid light-mode for \
 
 #### ls
 alias ls="ls --color=auto"
+
+#### history
+HISTFILE=~/.zhistory
+HISTSIZE=SAVEHIST=10000
+setopt sharehistory
+setopt extendedhistory
+
+#### adb
+export PATH=${PATH}:$HOME/Android/Sdk/platform-tools/
