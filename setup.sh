@@ -45,12 +45,6 @@ for package in "${PACKAGES[@]}"; do
     fi
 done
 
-# Change default shell to zsh
-if [ "$SHELL" != "/usr/bin/zsh" ]; then
-    echo "Changing default shell to zsh..."
-    chsh -s /usr/bin/zsh
-fi
-
 # Get thedirectory of the current script
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
@@ -75,3 +69,14 @@ for item in $(find $SCRIPT_DIR/.config -mindepth 1 -maxdepth 1); do
         exit 1
     fi
 done
+
+# Change default shell to zsh and start zsh
+if [ "$SHELL" != "/usr/bin/zsh" ]; then
+    echo "Changing default shell to zsh..."
+    chsh -s /usr/bin/zsh
+    echo "Starting zsh..."
+    exec /usr/bin/zsh
+else
+    echo "zsh is already the default shell. Starting zsh..."
+    exec /usr/bin/zsh
+fi
