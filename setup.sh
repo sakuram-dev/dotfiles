@@ -70,6 +70,17 @@ for item in $(find $SCRIPT_DIR/.config -mindepth 1 -maxdepth 1); do
     fi
 done
 
+# create a local config directory if it doesn't exist
+mkdir -p $SCRIPT_DIR/local
+# create a local config file if it doesn't exist
+if [ ! -f "$SCRIPT_DIR/local/.zsh_local" ]; then
+    touch $SCRIPT_DIR/local/.zsh_local
+    echo "Created $SCRIPT_DIR/local/.zsh_local"
+else
+    echo "$SCRIPT_DIR/local/.zsh_local already exists"
+fi
+
+
 # Change default shell to zsh and start zsh
 if [ "$SHELL" != "/usr/bin/zsh" ]; then
     echo "Changing default shell to zsh..."

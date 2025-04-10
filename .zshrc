@@ -47,3 +47,8 @@ setopt extendedhistory
 
 #### adb
 export PATH=${PATH}:$HOME/Android/Sdk/platform-tools/
+
+#### load local config if exists
+if [[ -f "$HOME/dotfiles/local/.zsh_local" ]]; then
+    source "$HOME/dotfiles/local/.zsh_local"
+fi
