@@ -15,6 +15,8 @@ chmod +x setup.sh
 - vim
 - tmux
 - ulauncher
+- Starship
+- zsh
 
 ## Feedback and Contribution
 If you have any feedback or want to contribute, feel free to open an issue or a pull request!

@@ -19,10 +19,6 @@ zinit light-mode for \
     zdharma-continuum/zinit-annex-patch-dl \
     zdharma-continuum/zinit-annex-rust
 
-### My Theme
-zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
-zinit light sindresorhus/pure
-
 ### My Plugins
 zinit wait lucid light-mode for \
   atinit"zicompinit; zicdreplay" \
@@ -52,3 +48,6 @@ export PATH=${PATH}:$HOME/Android/Sdk/platform-tools/
 if [[ -f "$HOME/dotfiles/local/.zsh_local" ]]; then
     source "$HOME/dotfiles/local/.zsh_local"
 fi
+
+# Load Starship prompt
+eval "$(starship init zsh)"

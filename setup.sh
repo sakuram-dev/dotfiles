@@ -80,6 +80,13 @@ else
     echo "$SCRIPT_DIR/local/.zsh_local already exists"
 fi
 
+# Install Starship prompt
+if ! command -v starship &> /dev/null; then
+    echo "Starship prompt not found, installing..."
+    curl -sS https://starship.rs/install.sh | sh
+else
+    echo "Starship prompt is already installed."
+fi
 
 # Change default shell to zsh and start zsh
 if [ "$SHELL" != "/usr/bin/zsh" ]; then
