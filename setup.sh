@@ -13,9 +13,14 @@ PACKAGES=(
     # add more packages as needed
 )
 
-# Check if the DISPLAY environment variable is set
-if [ -n "$DISPLAY" ]; then
-    echo "DISPLAY environment variable is set, adding GUI packages..."
+# Detect WSL by checking the kernel release string
+is_wsl() {
+    uname -r | grep -qi microsoft
+}
+
+# Only add GUI packages when DISPLAY is set and we're NOT running under WSL
+if [ -n "$DISPLAY" ] && ! is_wsl; then
+    echo "DISPLAY environment variable is set and not WSL, adding GUI packages..."
     PACKAGES+=(
         "ulauncher"
         # add more GUI packages as needed
@@ -24,7 +29,11 @@ if [ -n "$DISPLAY" ]; then
     sudo add-apt-repository universe -y
     sudo add-apt-repository ppa:agornostal/ulauncher -y
 else
-    echo "DISPLAY environment variable is not set, skipping GUI packages..."
+    if is_wsl; then
+        echo "Running under WSL, skipping GUI packages even if DISPLAY is set..."
+    else
+        echo "DISPLAY environment variable is not set, skipping GUI packages..."
+    fi
 fi
 
 # Update and install necessary packages
