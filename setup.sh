@@ -89,6 +89,14 @@ else
     echo "$SCRIPT_DIR/local/.zsh_local already exists"
 fi
 
+# Install mise
+if ! command -v mise &> /dev/null; then
+    echo "mise not found, installing..."
+    curl https://mise.run | sh
+else
+    echo "mise is already installed."
+fi
+
 # Install Starship prompt
 if ! command -v starship &> /dev/null; then
     echo "Starship prompt not found, installing..."

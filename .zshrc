@@ -51,3 +51,4 @@ fi
 
 # Load Starship prompt
 eval "$(starship init zsh)"
+eval "$(mise activate zsh)"
